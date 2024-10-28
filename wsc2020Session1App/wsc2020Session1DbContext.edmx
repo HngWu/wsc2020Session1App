@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="wsc2020Session1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DelegateFlights">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="delegateId" Type="int" Nullable="false" />
+          <Property Name="flightId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Delegates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Trade" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Official" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Flights">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Flight" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dep_Date" Type="date" Nullable="false" />
+          <Property Name="Dep_Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Arr_Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Class" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seats" Type="int" Nullable="false" />
+          <Property Name="Price_SGD" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HelperFlights">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="helperId" Type="int" Nullable="false" />
+          <Property Name="flightId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Helpers">
+          <Key>
+            <PropertyRef Name="Helper_ID" />
+          </Key>
+          <Property Name="Helper_ID" Type="int" Nullable="false" />
+          <Property Name="Helper_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Available_From" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Available_To" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_DelegateFlights_Delegates">
+          <End Role="Delegates" Type="Self.Delegates" Multiplicity="1" />
+          <End Role="DelegateFlights" Type="Self.DelegateFlights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delegates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DelegateFlights">
+              <PropertyRef Name="delegateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DelegateFlights_Flights">
+          <End Role="Flights" Type="Self.Flights" Multiplicity="1" />
+          <End Role="DelegateFlights" Type="Self.DelegateFlights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flights">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DelegateFlights">
+              <PropertyRef Name="flightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HelperFlights_Flights">
+          <End Role="Flights" Type="Self.Flights" Multiplicity="1" />
+          <End Role="HelperFlights" Type="Self.HelperFlights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flights">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HelperFlights">
+              <PropertyRef Name="flightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HelperFlights_Helpers">
+          <End Role="Helpers" Type="Self.Helpers" Multiplicity="1" />
+          <End Role="HelperFlights" Type="Self.HelperFlights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Helpers">
+              <PropertyRef Name="Helper_ID" />
+            </Principal>
+            <Dependent Role="HelperFlights">
+              <PropertyRef Name="helperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wsc2020Session1ModelStoreContainer">
+          <EntitySet Name="DelegateFlights" EntityType="Self.DelegateFlights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delegates" EntityType="Self.Delegates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HelperFlights" EntityType="Self.HelperFlights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Helpers" EntityType="Self.Helpers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DelegateFlights_Delegates" Association="Self.FK_DelegateFlights_Delegates">
+            <End Role="Delegates" EntitySet="Delegates" />
+            <End Role="DelegateFlights" EntitySet="DelegateFlights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DelegateFlights_Flights" Association="Self.FK_DelegateFlights_Flights">
+            <End Role="Flights" EntitySet="Flights" />
+            <End Role="DelegateFlights" EntitySet="DelegateFlights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HelperFlights_Flights" Association="Self.FK_HelperFlights_Flights">
+            <End Role="Flights" EntitySet="Flights" />
+            <End Role="HelperFlights" EntitySet="HelperFlights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HelperFlights_Helpers" Association="Self.FK_HelperFlights_Helpers">
+            <End Role="Helpers" EntitySet="Helpers" />
+            <End Role="HelperFlights" EntitySet="HelperFlights" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wsc2020Session1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="wsc2020Session1DbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DelegateFlights" EntityType="wsc2020Session1Model.DelegateFlight" />
+          <EntitySet Name="Delegates" EntityType="wsc2020Session1Model.Delegate" />
+          <EntitySet Name="Flights" EntityType="wsc2020Session1Model.Flight" />
+          <EntitySet Name="HelperFlights" EntityType="wsc2020Session1Model.HelperFlight" />
+          <EntitySet Name="Helpers" EntityType="wsc2020Session1Model.Helper" />
+          <EntitySet Name="sysdiagrams" EntityType="wsc2020Session1Model.sysdiagram" />
+          <AssociationSet Name="FK_DelegateFlights_Delegates" Association="wsc2020Session1Model.FK_DelegateFlights_Delegates">
+            <End Role="Delegate" EntitySet="Delegates" />
+            <End Role="DelegateFlight" EntitySet="DelegateFlights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DelegateFlights_Flights" Association="wsc2020Session1Model.FK_DelegateFlights_Flights">
+            <End Role="Flight" EntitySet="Flights" />
+            <End Role="DelegateFlight" EntitySet="DelegateFlights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HelperFlights_Flights" Association="wsc2020Session1Model.FK_HelperFlights_Flights">
+            <End Role="Flight" EntitySet="Flights" />
+            <End Role="HelperFlight" EntitySet="HelperFlights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HelperFlights_Helpers" Association="wsc2020Session1Model.FK_HelperFlights_Helpers">
+            <End Role="Helper" EntitySet="Helpers" />
+            <End Role="HelperFlight" EntitySet="HelperFlights" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DelegateFlight">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="delegateId" Type="Int32" Nullable="false" />
+          <Property Name="flightId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Delegate" Relationship="wsc2020Session1Model.FK_DelegateFlights_Delegates" FromRole="DelegateFlight" ToRole="Delegate" />
+          <NavigationProperty Name="Flight" Relationship="wsc2020Session1Model.FK_DelegateFlights_Flights" FromRole="DelegateFlight" ToRole="Flight" />
+        </EntityType>
+        <EntityType Name="Delegate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Passport" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nationality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Trade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Official" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DelegateFlights" Relationship="wsc2020Session1Model.FK_DelegateFlights_Delegates" FromRole="Delegate" ToRole="DelegateFlight" />
+        </EntityType>
+        <EntityType Name="Flight">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Flight1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dep_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Dep_Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Arr_Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Seats" Type="Int32" Nullable="false" />
+          <Property Name="Price_SGD" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="DelegateFlights" Relationship="wsc2020Session1Model.FK_DelegateFlights_Flights" FromRole="Flight" ToRole="DelegateFlight" />
+          <NavigationProperty Name="HelperFlights" Relationship="wsc2020Session1Model.FK_HelperFlights_Flights" FromRole="Flight" ToRole="HelperFlight" />
+        </EntityType>
+        <EntityType Name="HelperFlight">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="helperId" Type="Int32" Nullable="false" />
+          <Property Name="flightId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Flight" Relationship="wsc2020Session1Model.FK_HelperFlights_Flights" FromRole="HelperFlight" ToRole="Flight" />
+          <NavigationProperty Name="Helper" Relationship="wsc2020Session1Model.FK_HelperFlights_Helpers" FromRole="HelperFlight" ToRole="Helper" />
+        </EntityType>
+        <EntityType Name="Helper">
+          <Key>
+            <PropertyRef Name="Helper_ID" />
+          </Key>
+          <Property Name="Helper_ID" Type="Int32" Nullable="false" />
+          <Property Name="Helper_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Available_From" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Available_To" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="HelperFlights" Relationship="wsc2020Session1Model.FK_HelperFlights_Helpers" FromRole="Helper" ToRole="HelperFlight" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_DelegateFlights_Delegates">
+          <End Type="wsc2020Session1Model.Delegate" Role="Delegate" Multiplicity="1" />
+          <End Type="wsc2020Session1Model.DelegateFlight" Role="DelegateFlight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delegate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DelegateFlight">
+              <PropertyRef Name="delegateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DelegateFlights_Flights">
+          <End Type="wsc2020Session1Model.Flight" Role="Flight" Multiplicity="1" />
+          <End Type="wsc2020Session1Model.DelegateFlight" Role="DelegateFlight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DelegateFlight">
+              <PropertyRef Name="flightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HelperFlights_Flights">
+          <End Type="wsc2020Session1Model.Flight" Role="Flight" Multiplicity="1" />
+          <End Type="wsc2020Session1Model.HelperFlight" Role="HelperFlight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HelperFlight">
+              <PropertyRef Name="flightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HelperFlights_Helpers">
+          <End Type="wsc2020Session1Model.Helper" Role="Helper" Multiplicity="1" />
+          <End Type="wsc2020Session1Model.HelperFlight" Role="HelperFlight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Helper">
+              <PropertyRef Name="Helper_ID" />
+            </Principal>
+            <Dependent Role="HelperFlight">
+              <PropertyRef Name="helperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wsc2020Session1ModelStoreContainer" CdmEntityContainer="wsc2020Session1DbContext">
+          <EntitySetMapping Name="DelegateFlights">
+            <EntityTypeMapping TypeName="wsc2020Session1Model.DelegateFlight">
+              <MappingFragment StoreEntitySet="DelegateFlights">
+                <ScalarProperty Name="flightId" ColumnName="flightId" />
+                <ScalarProperty Name="delegateId" ColumnName="delegateId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delegates">
+            <EntityTypeMapping TypeName="wsc2020Session1Model.Delegate">
+              <MappingFragment StoreEntitySet="Delegates">
+                <ScalarProperty Name="Official" ColumnName="Official" />
+                <ScalarProperty Name="Trade" ColumnName="Trade" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flights">
+            <EntityTypeMapping TypeName="wsc2020Session1Model.Flight">
+              <MappingFragment StoreEntitySet="Flights">
+                <ScalarProperty Name="Price_SGD" ColumnName="Price_SGD" />
+                <ScalarProperty Name="Seats" ColumnName="Seats" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Arr_Time" ColumnName="Arr_Time" />
+                <ScalarProperty Name="Dep_Time" ColumnName="Dep_Time" />
+                <ScalarProperty Name="Dep_Date" ColumnName="Dep_Date" />
+                <ScalarProperty Name="Flight1" ColumnName="Flight" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HelperFlights">
+            <EntityTypeMapping TypeName="wsc2020Session1Model.HelperFlight">
+              <MappingFragment StoreEntitySet="HelperFlights">
+                <ScalarProperty Name="flightId" ColumnName="flightId" />
+                <ScalarProperty Name="helperId" ColumnName="helperId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Helpers">
+            <EntityTypeMapping TypeName="wsc2020Session1Model.Helper">
+              <MappingFragment StoreEntitySet="Helpers">
+                <ScalarProperty Name="Available_To" ColumnName="Available_To" />
+                <ScalarProperty Name="Available_From" ColumnName="Available_From" />
+                <ScalarProperty Name="Helper_Name" ColumnName="Helper_Name" />
+                <ScalarProperty Name="Helper_ID" ColumnName="Helper_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="wsc2020Session1Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

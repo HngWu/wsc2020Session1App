@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aa7edf395583413f86d9c4686c8866d1" Name="Diagram1">
+        <EntityTypeShape EntityType="wsc2020Session1Model.DelegateFlight" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="wsc2020Session1Model.Delegate" Width="1.5" PointX="0.75" PointY="10.5" />
+        <EntityTypeShape EntityType="wsc2020Session1Model.Flight" Width="1.5" PointX="0.75" PointY="3.125" />
+        <EntityTypeShape EntityType="wsc2020Session1Model.HelperFlight" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="wsc2020Session1Model.Helper" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="wsc2020Session1Model.sysdiagram" Width="1.5" PointX="5.75" PointY="2.125" />
+        <AssociationConnector Association="wsc2020Session1Model.FK_DelegateFlights_Delegates" />
+        <AssociationConnector Association="wsc2020Session1Model.FK_DelegateFlights_Flights" />
+        <AssociationConnector Association="wsc2020Session1Model.FK_HelperFlights_Flights" />
+        <AssociationConnector Association="wsc2020Session1Model.FK_HelperFlights_Helpers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
