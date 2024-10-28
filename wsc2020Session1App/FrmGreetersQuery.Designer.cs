@@ -35,7 +35,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btncancel = new System.Windows.Forms.Button();
             this.btnsearch = new System.Windows.Forms.Button();
-            this.greeternaetextfield = new System.Windows.Forms.TextBox();
+            this.greeternametextfield = new System.Windows.Forms.TextBox();
             this.greeteridtextfield = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -102,14 +102,15 @@
             this.btnsearch.TabIndex = 28;
             this.btnsearch.Text = "Search";
             this.btnsearch.UseVisualStyleBackColor = true;
+            this.btnsearch.Click += new System.EventHandler(this.btnsearch_Click);
             // 
-            // greeternaetextfield
+            // greeternametextfield
             // 
-            this.greeternaetextfield.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.greeternaetextfield.Location = new System.Drawing.Point(396, 188);
-            this.greeternaetextfield.Name = "greeternaetextfield";
-            this.greeternaetextfield.Size = new System.Drawing.Size(201, 26);
-            this.greeternaetextfield.TabIndex = 27;
+            this.greeternametextfield.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.greeternametextfield.Location = new System.Drawing.Point(396, 188);
+            this.greeternametextfield.Name = "greeternametextfield";
+            this.greeternametextfield.Size = new System.Drawing.Size(201, 26);
+            this.greeternametextfield.TabIndex = 27;
             // 
             // greeteridtextfield
             // 
@@ -117,21 +118,21 @@
             this.greeteridtextfield.Location = new System.Drawing.Point(173, 188);
             this.greeteridtextfield.Name = "greeteridtextfield";
             this.greeteridtextfield.Size = new System.Drawing.Size(201, 26);
-            this.greeteridtextfield.TabIndex = 26;
+            this.greeteridtextfield.TabIndex = 33;
             // 
             // FrmGreetersQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.greeteridtextfield);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btncancel);
             this.Controls.Add(this.btnsearch);
-            this.Controls.Add(this.greeternaetextfield);
-            this.Controls.Add(this.greeteridtextfield);
+            this.Controls.Add(this.greeternametextfield);
             this.Name = "FrmGreetersQuery";
             this.Text = "FrmGreetersQuery";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -148,7 +149,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btncancel;
         private System.Windows.Forms.Button btnsearch;
-        private System.Windows.Forms.TextBox greeternaetextfield;
+        private System.Windows.Forms.TextBox greeternametextfield;
         private System.Windows.Forms.TextBox greeteridtextfield;
     }
 }

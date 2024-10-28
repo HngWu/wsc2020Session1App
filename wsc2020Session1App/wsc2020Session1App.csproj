@@ -86,11 +86,23 @@
     <Compile Include="FrmDisplayDelegateQueryResults.Designer.cs">
       <DependentUpon>FrmDisplayDelegateQueryResults.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmDisplayFlightQueryResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDisplayFlightQueryResults.Designer.cs">
+      <DependentUpon>FrmDisplayFlightQueryResults.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGreetersQuery.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmGreetersQuery.Designer.cs">
       <DependentUpon>FrmGreetersQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDisplayGreetersQueryResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDisplayGreetersQueryResults.Designer.cs">
+      <DependentUpon>FrmDisplayGreetersQueryResults.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMainMenu.cs">
       <SubType>Form</SubType>
@@ -153,6 +165,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDisplayDelegateQueryResults.resx">
       <DependentUpon>FrmDisplayDelegateQueryResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDisplayFlightQueryResults.resx">
+      <DependentUpon>FrmDisplayFlightQueryResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDisplayGreetersQueryResults.resx">
+      <DependentUpon>FrmDisplayGreetersQueryResults.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmFlightsQuery.resx">
       <DependentUpon>FrmFlightsQuery.cs</DependentUpon>
