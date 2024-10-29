@@ -62,7 +62,8 @@ namespace wsc2020Session1App
                 (string.IsNullOrEmpty(name) || d.Name.Contains(name.Trim())) &&
                 (string.IsNullOrEmpty(nationality) || d.Nationality.Contains(nationality)) &&
                 (string.IsNullOrEmpty(trade) || d.Trade.Contains(trade))
-            ).ToList();
+            )
+                .ToList();
 
             // Return the search results
             // You can use the searchResults variable to perform further operations or display the results

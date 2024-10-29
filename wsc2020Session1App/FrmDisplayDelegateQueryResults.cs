@@ -19,7 +19,19 @@ namespace wsc2020Session1App
         public FrmDisplayDelegateQueryResults()
         {
             InitializeComponent();
-            bindingSource.DataSource = common.delegateList;
+
+            var delegateList = common.delegateList.Select(d => new
+            {
+                d.Passport,
+                d.Name,
+                d.Nationality,
+                Flight = d.DelegateFlights.Select(df => df.Flight.Flight1).FirstOrDefault(),
+                Departure = d.DelegateFlights.Select(df => df.Flight.Dep_Date).FirstOrDefault() + "" + d.DelegateFlights.Select(df => df.Flight.Dep_Time).FirstOrDefault(),
+                Arrival = d.DelegateFlights.Select(df => df.Flight.Dep_Date).FirstOrDefault() + "" + d.DelegateFlights.Select(df => df.Flight.Arr_Time).FirstOrDefault(),
+
+            });
+
+            bindingSource.DataSource = delegateList;
             dgvdelegate.DataSource = bindingSource;
         }
 

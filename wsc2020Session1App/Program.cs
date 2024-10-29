@@ -16,7 +16,7 @@ namespace wsc2020Session1App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmQuery());
+            Application.Run(new FrmMainMenu());
         }
     }
 }
