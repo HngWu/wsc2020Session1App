@@ -130,6 +130,18 @@ namespace wsc2020Session1App
                                 var line = reader.ReadLine();
                                 var values = line.Split(',');
 
+                                int classChoice;
+
+                                if (values[6] == "E")
+                                {
+                                    classChoice = 1;
+
+                                }
+                                else
+                                {
+                                    classChoice = 2;
+                                }
+
                                 var flight = new Flight
                                 {
                                     City = values[0],
@@ -138,7 +150,8 @@ namespace wsc2020Session1App
                                     Dep_Date = DateTime.ParseExact(values[3], "yyyy:MM:dd", System.Globalization.CultureInfo.InvariantCulture),
                                     Dep_Time = TimeSpan.Parse(values[4]),
                                     Arr_Time = TimeSpan.Parse(values[5]),
-                                    Class = values[6],
+                                    Class = classChoice.ToString(),
+                                    //TODO: change to int
                                     Seats = int.Parse(values[7]),
                                     Price_SGD = decimal.Parse(values[8]),
                                 };
