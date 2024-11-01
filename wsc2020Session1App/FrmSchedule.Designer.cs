@@ -61,7 +61,7 @@
             // 
             this.lbdisplayoutput.AutoSize = true;
             this.lbdisplayoutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbdisplayoutput.Location = new System.Drawing.Point(351, 195);
+            this.lbdisplayoutput.Location = new System.Drawing.Point(92, 184);
             this.lbdisplayoutput.Name = "lbdisplayoutput";
             this.lbdisplayoutput.Size = new System.Drawing.Size(60, 24);
             this.lbdisplayoutput.TabIndex = 12;

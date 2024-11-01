@@ -12,29 +12,21 @@ namespace wsc2020Session1App
     using System;
     using System.Collections.Generic;
     
-    public partial class Flight
+    public partial class FlightClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Flight()
+        public FlightClass()
         {
             this.DelegateFlights = new HashSet<DelegateFlight>();
             this.FlightTypes = new HashSet<FlightType>();
-            this.HelperFlights = new HashSet<HelperFlight>();
         }
     
         public int id { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string Flight1 { get; set; }
-        public System.DateTime Dep_Date { get; set; }
-        public System.TimeSpan Dep_Time { get; set; }
-        public System.TimeSpan Arr_Time { get; set; }
+        public string @class { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DelegateFlight> DelegateFlights { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FlightType> FlightTypes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HelperFlight> HelperFlights { get; set; }
     }
 }

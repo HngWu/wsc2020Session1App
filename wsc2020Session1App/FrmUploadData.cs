@@ -97,6 +97,19 @@ namespace wsc2020Session1App
             }
         }
 
+        public class tempFlight
+        {
+            public string City { get; set; }
+            public string Country { get; set; }
+            public string Flight1 { get; set; }
+            public DateTime Dep_Date { get; set; }
+            public TimeSpan Dep_Time { get; set; }
+            public TimeSpan Arr_Time { get; set; }
+            public string Class { get; set; }
+            public int Seats { get; set; }
+            public decimal Price_SGD { get; set; }
+        }
+
         private void btnflights_Click(object sender, EventArgs e)
         {
             FileDialog fileDialog = new OpenFileDialog();
@@ -112,6 +125,8 @@ namespace wsc2020Session1App
                     {
                         var csvheaders = reader.ReadLine().Split(',');
                         var headers = new List<string>();
+                        var flightsList = new List<tempFlight>();
+
 
                         foreach (var header in csvheaders)
                         {
@@ -130,19 +145,7 @@ namespace wsc2020Session1App
                                 var line = reader.ReadLine();
                                 var values = line.Split(',');
 
-                                int classChoice;
-
-                                if (values[6] == "E")
-                                {
-                                    classChoice = 1;
-
-                                }
-                                else
-                                {
-                                    classChoice = 2;
-                                }
-
-                                var flight = new Flight
+                                var flight = new tempFlight
                                 {
                                     City = values[0],
                                     Country = values[1],
@@ -150,15 +153,62 @@ namespace wsc2020Session1App
                                     Dep_Date = DateTime.ParseExact(values[3], "yyyy:MM:dd", System.Globalization.CultureInfo.InvariantCulture),
                                     Dep_Time = TimeSpan.Parse(values[4]),
                                     Arr_Time = TimeSpan.Parse(values[5]),
-                                    Class = classChoice.ToString(),
-                                    //TODO: change to int
+                                    Class = values[6],
                                     Seats = int.Parse(values[7]),
                                     Price_SGD = decimal.Parse(values[8]),
                                 };
-                               
-                                context.Flights.Add(flight);
+
+                                flightsList.Add(flight);
+                                //context.SaveChanges();
+                            }
+
+
+                            var distinctFlights = flightsList.GroupBy(f => f.Flight1).Select(f => f.First()).ToList();
+
+
+                            foreach (var flight in distinctFlights)
+                            {
+                                var flightTypes = flightsList.Where(f => f.Flight1 == flight.Flight1).ToList();
+
+                                var newFlight = new Flight
+                                {
+                                    City = flight.City,
+                                    Country = flight.Country,
+                                    Flight1 = flight.Flight1,
+                                    Dep_Date = flight.Dep_Date,
+                                    Dep_Time = flight.Dep_Time,
+                                    Arr_Time = flight.Arr_Time,
+                                };
+                                context.Flights.Add(newFlight);
+
+                                foreach (var flightType in flightTypes)
+                                {
+                                    int classtype;
+
+                                    if (flightType.Class == "E")
+                                    {
+                                        classtype = context.FlightClasses.Where(fc => fc.@class == "Economy").Select(fc => fc.id).FirstOrDefault();
+                                    }
+                                    else
+                                    {
+                                        classtype = context.FlightClasses.Where(fc => fc.@class == "Business").Select(fc => fc.id).FirstOrDefault();
+                                    }
+
+
+                                    var newFlightType = new FlightType
+                                    {
+                                        Flight = newFlight,
+                                        classId = classtype,
+                                        seats = flightType.Seats,
+                                        price = flightType.Price_SGD,
+                                    };
+
+                                    context.FlightTypes.Add(newFlightType);
+                                }
                                 context.SaveChanges();
                             }
+
+
                             MessageBox.Show("File uploaded successfully");
                         }
                     }
@@ -175,7 +225,6 @@ namespace wsc2020Session1App
 
             }
         }
-
         private void btndelegatefile_Click(object sender, EventArgs e)
         {
             FileDialog fileDialog = new OpenFileDialog();
