@@ -18,7 +18,19 @@ namespace wsc2020Session1App
         public FrmDisplayGreetersQueryResults()
         {
             InitializeComponent();
-            bindingSource.DataSource = common.helperList;
+
+            var helperList = common.helperList.Select(h => new
+            {
+                h.Helper_ID,
+                h.Helper_Name,
+                h.Available_From,
+                h.Available_To,
+                dep_date = h.HelperFlights.Select(x=>x.Flight.Dep_Date).FirstOrDefault(),
+                dep_time = h.HelperFlights.Select(x=>x.Flight.Dep_Time).FirstOrDefault(),
+                arrival = h.HelperFlights.Select(x=>x.Flight.Arr_Time).FirstOrDefault(),
+            }).ToList();
+
+            bindingSource.DataSource = helperList;
             dgvgreeters.DataSource = bindingSource;
         }
 
